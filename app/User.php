@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
 
     /**
@@ -36,4 +37,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    /**
+     * The api token is unique in users table. so we are checking if the generated string is already exists
+     *
+     * @author Md. Atiqur Rahman <atiqur.su@gmail.com, atiqur@shaficonsultancy.com>
+     * @return $this
+     */
+    public function createToken() {
+
+        $randStr = '';
+        $exist = true;
+
+        do {
+
+            $randStr = Str::random(80);
+
+            $exist = $this->where('api_token', $randStr)->exists();
+
+        } while($exist);
+
+
+        $this->api_token = $randStr;
+
+        $this->save();
+
+        return $this;
+    }
+
 }

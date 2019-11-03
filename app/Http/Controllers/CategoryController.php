@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller {
 
 
+    /**
+     *
+     * @author Md. Atiqur Rahman <atiqur.su@gmail.com, atiqur@shaficonsultancy.com>
+     * @param Request $request
+     * @return array
+     */
     public function __getList(Request $request) {
 
         $cat = Category::select('name')->get();
@@ -19,35 +25,13 @@ class CategoryController extends Controller {
             'msg'    => 'retrieved successfully.',
             'result' => AppConfig::GENERAL_RETURN_RESULT_OK,
         );
-
-
-        /*
-
-        if($request->ajax()) {
-
-            $cat = Category::select('name')->all();
-
-            return array(
-                'dt'    => $cat,
-                'msg'    => 'retrieved successfully.',
-                'result' => AppConfig::GENERAL_RETURN_RESULT_OK,
-            );
-
-        }
-
-        return array(
-            'msg'    => 'invalid request',
-            'result' => AppConfig::GENERAL_RETURN_RESULT_NOT_OK,
-        );
-
-        //*/
     }
 
 
     /**
      *
      *
-     * @author Md. Atiqur Rahman <atiq.cse.cu0506.su@gmail.com, atiqur@shaficonsultancy.com>
+     * @author Md. Atiqur Rahman <atiqur.su@gmail.com, atiqur@shaficonsultancy.com>
      * @param Request $request
      * @return array|\Illuminate\Support\MessageBag
      */
