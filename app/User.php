@@ -48,9 +48,6 @@ class User extends Authenticatable {
      */
     public function createToken() {
 
-        $randStr = '';
-        $exist = true;
-
         do {
 
             $randStr = Str::random(80);

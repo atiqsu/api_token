@@ -36,19 +36,21 @@ Route::prefix('v1')->name('av1.')->group(function () {
 });
 
 
-Route::prefix('v1')->name('av1.')->group(function () {
 
-    Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
+
+    Route::prefix('v1')->name('av1.')->group(function () {
 
         Route::get('/test',             'Api\CategoryController@test')->name('lnk1');
 
         Route::prefix('category')->name('cat.')->group(function () {
 
-            Route::get('/category',         'Api\CategoryController@__getList')->name('lnk2');
-            Route::post('/category/add',    'Api\CategoryController@__create')->name('lnk3');
-
-        })->middleware('auth:api');
-
+            Route::get('/',             'Api\CategoryController@__getList')->name('lnk2');
+            Route::post('/add',         'Api\CategoryController@__create')->name('lnk3');
+            Route::post('/update/{idd}',    'Api\CategoryController@__update')->name('lnk3');
+            Route::post('/delete/{idd}',    'Api\CategoryController@__delete')->name('lnk3');
+        });
     });
 });
+
 
